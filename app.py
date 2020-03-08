@@ -2,31 +2,29 @@ from flask import Flask ,jsonify, request, make_response
 import jwt
 import datetime
 from functools import wraps
-import sqlite3
 import pyrebase
 config = {
-  "apiKey": "AIzaSyCPYEjH0XJzbMARg_mIlOqtMJa0QW1DgGQ",
-  "authDomain": "fireapp-8a37a.firebaseapp.com",
-  "databaseURL": "https://fireapp-8a37a.firebaseio.com",
-  "projectId": "fireapp-8a37a",
-  "storageBucket": "fireapp-8a37a.appspot.com",
-  "messagingSenderId": "593560484305",
-  "appId": "1:593560484305:web:8b2dc652f42921deeec8f0",
-  "measurementId": "G-J38QTVJH3B"
+  "apiKey": "AIzaSyCxyhCnLdZ4Ol_WkUwtBVXhHGEP2j-hPcY",
+  "authDomain": "buy-and-selling-7137d.firebaseapp.com",
+  "databaseURL": "https://buy-and-selling-7137d.firebaseio.com",
+  "projectId": "buy-and-selling-7137d",
+  "storageBucket": "buy-and-selling-7137d.appspot.com",
+  "messagingSenderId": "246130623636",
+  "appId": "1:246130623636:web:c2a35f4127a12e38542081",
+  "measurementId": "G-6JZXXTCN8R"
 }
 
 
 app=Flask(__name__)
 l=[]
 app.config['SECRET_KEY']='thisissecretkey'
-firebase = pyrebase.initialize_app(config)
-db = firebase.database()
-data=db.get()
+firebase = pyrebase.initialize_app(config)#to connect with firebase
+db = firebase.database()#to connect with firebase database
+data=db.get()#to get the data from database
 for user in data.each():
     l.append(user.key())
     l.append(user.val())
-    print(user.key()) # Morty
-    print(user.val()) # {name": "Mortimer 'Morty' Smith"}
+   
 def token_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
